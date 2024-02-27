@@ -5,6 +5,8 @@ This is the code and data of paper **Multi-perspective Improvement of Knowledge 
 The entire project consists of three steps: (1) Generating data, (2) Processing data and (3) Runing KGC models.
 
 ##  Generating data
+You can directly download the data we generated from [Goolge Drive](https://drive.google.com/drive/folders/1pBXBB0PcNOpfIZETSZCD4QI61L1-JzN_?usp=sharing). Put the data in current directory, e.g., `MPIKGC/LP_fb_wn_chatglm2/`.
+
  If you want to generate data with LLMs by yourself, you can run the following comment to query LLMs for data:
 
 First, `cd generating_MPIKG/`, then
@@ -50,15 +52,16 @@ python merge.py
 Download KGC models from their repository: [CSprom-KG](https://github.com/chenchens190009/CSProm-KG),
 [LMKE](https://github.com/Neph0s/LMKE), 
 [SimKGC](https://github.com/intfloat/SimKGC), 
-[KG-BERT](https://github.com/yao8839836/kg-bert)
+[KG-BERT](https://github.com/yao8839836/kg-bert). Put these project in current directory, e.g., `MPIKGC/CSprom-KG/`.
 
 
-For diffrent KGC models, you need to slightly modify the form by runing:
+For diffrent KGC models, you need to slightly modify the form of data by runing:
 ```python
 python data4kgc_models.py 
 ```
-Note that KG-BERT need same form as LMKE, You can directly copy it over.
+This code will transfer the form of data to adapt to different KGC model requirements, and copy the data to corresponding model project folder.
 
+Note that KG-BERT need same form as LMKE, You can directly copy it over.
 ## Runing KGC models
-Configure according to the environment and process requirements of each model.
+Configure according to the environment and process requirements of each model. Hyperparameters for KGC models can be found in Appendices of our paper.
 
