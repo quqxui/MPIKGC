@@ -1,2 +1,64 @@
-# MPIKGC
-Multi-perspective Improvement of Knowledge Graph Completion with Large Language Models
+# Multi-perspective Improvement of Knowledge Graph Completion with Large Language Models
+
+This is the code and data of paper **Multi-perspective Improvement of Knowledge Graph Completion with Large Language Models**, LREC-COLING 2024.
+
+The entire project consists of three steps: (1) Generating data, (2) Processing data and (3) Runing KGC models.
+
+##  Generating data
+ If you want to generate data with LLMs by yourself, you can run the following comment to query LLMs for data:
+
+First, `cd generating_MPIKG/`, then
+
+For FB15k237:
+```python 
+python querying_llm_fb15k237.py --max_length 256 --temperature 0.2 --cuda 0 --batchsize 1 --LLMfold './../LP_fb_wn_llama2/' --LLMname ChatGLM2
+```
+For WN18RR:
+```python 
+python querying_llm_wn18rr.py --max_length 256 --temperature 0.2 --cuda 0 --batchsize 1 --LLMfold './../LP_fb_wn_llama2/' --LLMname ChatGLM2
+```
+
+For FB13 and WN11:
+```python 
+python querying_llm_TC_FB13_WN11.py --max_length 256 --temperature 0.2 --cuda 0 --batchsize 1 --LLMfold './../TC_fb_wn_llama2/' --LLMname ChatGLM2 --fb_or_wn FB13
+```
+
+After getting extracted keywords, you can genearate the top K matching entities for Structure Extraction, and change the default parameters in codes to obtain the desired data:
+```python
+python textmatch4structure.py 
+```
+
+Finally, generating data in corresponding path, e.g., `LP_fb_wn_chatglm2/FB15k237/`:
+
+`cotdes.txt` for `MPIKGC-E`
+
+`rel2des.txt` for `MPIKGC-R Global` 
+
+`rel2sentence.txt` for `MPIKGC-R Local` 
+
+`rel2reverse.txt` for `MPIKGC-R Reverse` 
+
+`struc/*` for `MPIKGC-S`
+
+
+## Processing data
+Merge the enhanced data with original KG to generate new KG with regular form:
+```python
+cd processing_MPIKG
+python merge.py 
+```
+Download KGC models from their repository: [CSprom-KG](https://github.com/chenchens190009/CSProm-KG),
+[LMKE](https://github.com/Neph0s/LMKE), 
+[SimKGC](https://github.com/intfloat/SimKGC), 
+[KG-BERT](https://github.com/yao8839836/kg-bert)
+
+
+For diffrent KGC models, you need to slightly modify the form by runing:
+```python
+python data4kgc_models.py 
+```
+Note that KG-BERT need same form as LMKE, You can directly copy it over.
+
+## Runing KGC models
+Configure according to the environment and process requirements of each model.
+
