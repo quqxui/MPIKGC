@@ -2,7 +2,7 @@
 import re
 import sys
 sys.path.append("..")
-from src.read import read_ent2keyword
+from processing_MPIKG.read import read_ent2keyword
 import tqdm
 
 def WN11_ent2keywords():
@@ -83,11 +83,16 @@ def word_matching(datafold, LLMname,fb_or_wn ,src_or_expa):
     f_top5_selfloop.close()
 
 if __name__ == '__main__':
-    fb_or_wn = 'WN18RR' # 'FB15k237' 'WN11','FB13'
-    LLMname = 'llama2'# 'chatglm2'
-    src_or_expa = 'srckeywords', # 'cotkeywords'
-    datafold = './../LP_fb_wn_llama2/' # './../TC_fb_wn_llama2/' './../LP_fb_wn_llama2/'  
-    word_matching(LLMname,fb_or_wn ,src_or_expa)
+    import argparse
+    parser = argparse.ArgumentParser(description='description of the program')
+    parser.add_argument( '--fb_or_wn',type=str,default='WN18RR') # 'FB15k237' 'WN11','FB13'
+    parser.add_argument('--LLMname', type=str,default='llama2') # 'chatglm2'
+    parser.add_argument('--src_or_expa', type=str,default='srckeywords')  # 'cotkeywords'
+    parser.add_argument('--datafold', type=str,default='./../LP_fb_wn_llama2/') # './../TC_fb_wn_llama2/' './../LP_fb_wn_llama2/' 
+
+    args = parser.parse_args()
+
+    word_matching(args.datafold, args.LLMname,args.fb_or_wn ,args.src_or_expa)
 
 
 
