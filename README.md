@@ -7,7 +7,7 @@ The entire project consists of three steps: (1) Generating data, (2) Processing 
 ##  Generating data
 You can directly download the data we generated from [Goolge Drive](https://drive.google.com/drive/folders/1pBXBB0PcNOpfIZETSZCD4QI61L1-JzN_?usp=sharing). Put the data in current directory, e.g., `MPIKGC/LP_fb_wn_chatglm2/`.
 
- If you want to generate data with LLMs by yourself, you can run the following comment to query LLMs for data:
+ If you want to generate data with LLMs by yourself, you can run the following command to query LLMs for data:
 
 First, `cd generating_MPIKG/`, then
 
