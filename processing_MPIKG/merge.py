@@ -174,11 +174,15 @@ def merge_srcdes_srckeywords_rel2sentence_struc_srckeywords_top3_selfloop(rel_ve
 
 
 if __name__=='__main__':
-
-    datafold = './../LP_fb_wn_chatglm2/' # './../LP_fb_wn_llama2/' # './../TC_fb_wn_llama2/'
-    LLMname = 'chatglm2' # 'llama2'
-    
-    fb_or_wn = 'FB15k237' # 'WN18RR' 'FB13'  'WN11'
+    import argparse
+    parser = argparse.ArgumentParser(description='description of the program')
+    parser.add_argument( '--fb_or_wn',type=str,default='WN18RR') # 'FB15k237' 'WN11','FB13'
+    parser.add_argument('--LLMname', type=str,default='llama2') # 'chatglm2'
+    parser.add_argument('--datafold', type=str,default='./../LP_fb_wn_llama2/') # './../TC_fb_wn_llama2/' './../LP_fb_wn_llama2/' 
+    args = parser.parse_args()
+    datafold = args.datafold
+    LLMname = args.LLMname
+    fb_or_wn = args.fb_or_wn
 
     ################################################################
     ########################### Entity #############################
