@@ -225,4 +225,4 @@ if __name__=='__main__':
     ################################################################
     ########################### combine ##########################
     ################################################################
-    merge_srcdes_srckeywords_rel2sentence_struc_srckeywords_top3_selfloop('struc_srckeywords_top3_selfloop')
+    merge_srcdes_srckeywords_rel2sentence_struc_srckeywords_top3_selfloop(['rel2sentence'], 'struc_srckeywords_top3_selfloop')
