@@ -44,6 +44,14 @@ def read_ent2des(datafold, fb_or_wn):
 
     return ent2des
 
+def read_WN_ent2name(datafold, fb_or_wn):
+    WN_ent2name = {}
+    with open(f'{datafold}{fb_or_wn}/wordnet-mlj12-definitions.txt', 'r') as f:
+        for line in f.readlines():
+            entity, name, des = line.rstrip('\n').split('\t')
+            WN_ent2name[entity] = name
+    return WN_ent2name
+
 
 def read_ent2expa_cot(LLMname, datafold, fb_or_wn, brief_or_expa):
     ent2expa_cot = read_ent2ans(f'{datafold}{fb_or_wn}/{brief_or_expa}')
