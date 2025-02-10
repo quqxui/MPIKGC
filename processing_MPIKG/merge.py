@@ -1,4 +1,4 @@
-from read import read_ent2des, read_ent2expa_cot, read_ent2keyword, data_copy, change_triplefile_relation
+from read import read_ent2des, read_ent2expa_cot, read_ent2keyword, data_copy, change_triplefile_relation, read_WN_ent2name
 
 
 ################################################################
@@ -17,12 +17,14 @@ def merge_srcdes_cotdes():
         filePath = 'FB15k_mid2description.txt'
     elif fb_or_wn == 'WN18RR':
         filePath = 'wordnet-mlj12-definitions.txt'
+        WN_ent2name = read_WN_ent2name(datafold, fb_or_wn)
     with open(datafold + dataset + filePath,'w') as f:
         for entity in ent2des.keys():
             des = ent2des[entity] + " [SEP] " + ent2expa_cot[entity]
-            f.write('{}\t{}\n'.format(entity, des))
-
-
+            if filePath == 'wordnet-mlj12-definitions.txt':
+                f.write('{}\t{}\t{}\n'.format(entity,WN_ent2name[entity], des))
+            else:
+                f.write('{}\t{}\n'.format(entity, des))
 def merge_srcdes_srckeywords():
     dataset = f'{fb_or_wn}_srcdes_srckeywords_'+ LLMname +'/'
     data_copy(datafold, dataset, fb_or_wn)
@@ -34,10 +36,14 @@ def merge_srcdes_srckeywords():
         filePath = 'FB15k_mid2description.txt'
     elif fb_or_wn == 'WN18RR':
         filePath = 'wordnet-mlj12-definitions.txt'
+        WN_ent2name = read_WN_ent2name(datafold, fb_or_wn)
     with open(datafold + dataset + filePath,'w') as f:
         for entity in ent2des.keys():
             des = ent2des[entity] + " [SEP] " + ent2keyword[entity]
-            f.write('{}\t{}\n'.format(entity, des))
+            if filePath == 'wordnet-mlj12-definitions.txt':
+                f.write('{}\t{}\t{}\n'.format(entity,WN_ent2name[entity], des))
+            else:
+                f.write('{}\t{}\n'.format(entity, des))
 
 
 ################################################################
@@ -118,10 +124,14 @@ def merge_srcdes_srckeywords_rel2sentence(rel_version):
         filePath = 'FB15k_mid2description.txt'
     elif fb_or_wn == 'WN18RR':
         filePath = 'wordnet-mlj12-definitions.txt'
+        WN_ent2name = read_WN_ent2name(datafold, fb_or_wn)
     with open(datafold + dataset + filePath,'w') as f:
         for entity in ent2des.keys():
             des = ent2des[entity] + " [SEP] " + ent2keyword[entity]
-            f.write('{}\t{}\n'.format(entity, des))
+            if filePath == 'wordnet-mlj12-definitions.txt':
+                f.write('{}\t{}\t{}\n'.format(entity,WN_ent2name[entity], des))
+            else:
+                f.write('{}\t{}\n'.format(entity, des))
 
     change_triplefile_relation(LLMname, datafold, dataset, fb_or_wn, rel_version)
 
@@ -155,10 +165,14 @@ def merge_srcdes_srckeywords_rel2sentence_struc_srckeywords_top3_selfloop(rel_ve
         filePath = 'FB15k_mid2description.txt'
     elif fb_or_wn == 'WN18RR':
         filePath = 'wordnet-mlj12-definitions.txt'
+        WN_ent2name = read_WN_ent2name(datafold, fb_or_wn)
     with open(datafold + dataset + filePath,'w') as f:
         for entity in ent2des.keys():
             des = ent2des[entity] + " [SEP] " + ent2keyword[entity]
-            f.write('{}\t{}\n'.format(entity, des))
+            if filePath == 'wordnet-mlj12-definitions.txt':
+                f.write('{}\t{}\t{}\n'.format(entity,WN_ent2name[entity], des))
+            else:
+                f.write('{}\t{}\n'.format(entity, des))
 
     change_triplefile_relation(LLMname, datafold, dataset, fb_or_wn, rel_version)
 
