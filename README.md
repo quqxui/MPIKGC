@@ -13,11 +13,11 @@ First, `cd generating_MPIKG/`, then
 
 For FB15k237:
 ```python 
-python querying_llm_fb15k237.py --max_length 256 --temperature 0.2 --cuda 0 --batchsize 1 --LLMfold './../LP_fb_wn_llama2/' --LLMname ChatGLM2
+python querying_llm_fb15k237.py --max_length 256 --temperature 0.2 --cuda 0 --batchsize 1 --LLMfold './../LP_fb_wn_chatglm2/' --LLMname ChatGLM2
 ```
 For WN18RR:
 ```python 
-python querying_llm_wn18rr.py --max_length 256 --temperature 0.2 --cuda 0 --batchsize 1 --LLMfold './../LP_fb_wn_llama2/' --LLMname ChatGLM2
+python querying_llm_wn18rr.py --max_length 256 --temperature 0.2 --cuda 0 --batchsize 1 --LLMfold './../LP_fb_wn_chatglm2/' --LLMname ChatGLM2
 ```
 
 For FB13 and WN11:
@@ -64,4 +64,8 @@ This code will transfer the form of data to adapt to different KGC model require
 Note that KG-BERT need same form as LMKE, You can directly copy it over.
 ## Runing KGC models
 Configure according to the environment and process requirements of each model. Hyperparameters for KGC models can be found in Appendices of our paper.
+
+## Additional Notes
+Since this implementation involves 5 prompts augmentation + 4 KGC models + 4 datasets, the merging code is relatively complex.
+If you only wish to implement our method on your own dataset, you do not need to reference our code. Instead, you can follow the prompts provided in the paper to generate data independently. The main focus of the project code is on data processing.
 
